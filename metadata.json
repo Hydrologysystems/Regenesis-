@@ -1,0 +1,6 @@
+{
+  "name": "Thomas Ventura — The Regenesis Project",
+  "description": "Modern sleek website for Thomas Ventura — Author, Speaker, and Neuro-Biological Systems Architect behind The Regenesis Project.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
