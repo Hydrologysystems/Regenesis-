@@ -30,9 +30,94 @@ import { LegalModal } from './components/LegalModal';
 
 import { BookInfo, KeynoteInfo } from './types';
 
-export default function App() {
-  // Navigation state
-  const [currentPage, setCurrentPage] = useState<'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist'>('home');
+export type PageKey = 'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist';
+
+export interface RouteMeta {
+  title: string;
+  description: string;
+  canonical: string;
+  ogTitle: string;
+  ogDescription: string;
+}
+
+export const ROUTE_METADATA: Record<PageKey, RouteMeta> = {
+  home: {
+    title: "Thomas Ventura — The Regenesis Project & Human Operating System (HOS™)",
+    description: "Official portal for Thomas Ventura, featuring the 10 Lenses of Science, The Mirror Quiz, Signature Keynotes, Speaker Kit, and Book Trilogy.",
+    canonical: "https://thomasventura.com/",
+    ogTitle: "Thomas Ventura — The Regenesis Project & Human Operating System (HOS™)",
+    ogDescription: "Recoding executive performance through nervous system coherence, biological capacity, and the Human Operating System.",
+  },
+  about: {
+    title: "About Thomas Ventura — Neuro-Biological Systems Architect & Author",
+    description: "From a war-zone refugee to multi-million dollar business operator, Thomas Ventura decodes the biological capacity and nervous system coherence capping executive leadership.",
+    canonical: "https://thomasventura.com/about",
+    ogTitle: "About Thomas Ventura — Neuro-Biological Systems Architect & Author",
+    ogDescription: "Discover the journey, executive experience, and biological framework of Thomas Ventura.",
+  },
+  science: {
+    title: "The 10 Lenses of Science — Human Operating System (HOS™) | Thomas Ventura",
+    description: "Explore the 10 scientific disciplines (Neuroscience, Cybernetics, Polyvagal Theory, Epigenetics, Bio-Energetics, and more) powering The Regenesis Project.",
+    canonical: "https://thomasventura.com/science",
+    ogTitle: "The 10 Lenses of Science — Human Operating System (HOS™)",
+    ogDescription: "A bio-digital framework integrating 10 scientific disciplines for executive performance and capacity.",
+  },
+  mythology: {
+    title: "The Mythology & Origin Story — Thomas Ventura & The Regenesis Project",
+    description: "The origin story of Thomas Ventura and the archetypal transformation from Survival Operating System to Quantum Neural Execution.",
+    canonical: "https://thomasventura.com/mythology",
+    ogTitle: "The Mythology & Origin Story — Thomas Ventura",
+    ogDescription: "Decoding the origin story and archetypal journey from survival to high-performance neural execution.",
+  },
+  quiz: {
+    title: "The Mirror Quiz — Neuro-Biological Executive Capacity Assessment",
+    description: "Take The Mirror Quiz to analyze the subconscious hardware running beneath your habits and unlock your true executive operating capacity.",
+    canonical: "https://thomasventura.com/mirror-quiz",
+    ogTitle: "The Mirror Quiz — Neuro-Biological Executive Capacity Assessment",
+    ogDescription: "Scan the subconscious hardware running beneath your executive decisions and habits.",
+  },
+  'speaker-kit': {
+    title: "Speaker Kit & Keynotes — Thomas Ventura | Executive Summits & Keynotes",
+    description: "Keynote speeches, speaker requirements, bio downloads, and booking details for Thomas Ventura at global leadership summits and executive retreats.",
+    canonical: "https://thomasventura.com/speaker-kit",
+    ogTitle: "Speaker Kit & Keynotes — Thomas Ventura",
+    ogDescription: "Book Thomas Ventura for keynotes, executive retreats, and corporate summits.",
+  },
+  waitlist: {
+    title: "Book Drop Waitlist & Cohorts — Thomas Ventura | Biological Architecture",
+    description: "Join the private waitlist for Thomas Ventura's upcoming book trilogy on Biological Architecture, Cybernetic Leadership, and Epigenetic Freedom.",
+    canonical: "https://thomasventura.com/waitlist",
+    ogTitle: "Book Drop Waitlist & Cohorts — Thomas Ventura",
+    ogDescription: "Reserve your spot for confidential book drops and executive cohorts.",
+  },
+};
+
+export const getPageFromPath = (path: string): PageKey => {
+  const cleanPath = path.toLowerCase().replace(/\/$/, '') || '/';
+  if (cleanPath === '/about') return 'about';
+  if (cleanPath === '/science') return 'science';
+  if (cleanPath === '/mythology') return 'mythology';
+  if (cleanPath === '/mirror-quiz' || cleanPath === '/quiz') return 'quiz';
+  if (cleanPath === '/speaker-kit') return 'speaker-kit';
+  if (cleanPath === '/waitlist') return 'waitlist';
+  return 'home';
+};
+
+interface AppProps {
+  initialPath?: string;
+}
+
+export default function App({ initialPath }: AppProps) {
+  // Navigation state initialized from initialPath or window location
+  const [currentPage, setCurrentPage] = useState<PageKey>(() => {
+    if (initialPath) {
+      return getPageFromPath(initialPath);
+    }
+    if (typeof window !== 'undefined') {
+      return getPageFromPath(window.location.pathname);
+    }
+    return 'home';
+  });
 
   // Modal states
   const [quizOpen, setQuizOpen] = useState(false);
@@ -44,8 +129,58 @@ export default function App() {
   const [selectedKeynote, setSelectedKeynote] = useState<KeynoteInfo | null>(null);
   const [legalType, setLegalType] = useState<'terms' | 'privacy' | null>(null);
 
-  const handleNavigatePage = (page: 'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist', sectionId?: string) => {
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const syncRouteFromLocation = () => {
+      const page = getPageFromPath(window.location.pathname);
+      setCurrentPage(page);
+    };
+
+    // Update document head metadata dynamically when page changes in browser
+    const meta = ROUTE_METADATA[currentPage] || ROUTE_METADATA.home;
+    document.title = meta.title;
+
+    const descEl = document.querySelector('meta[name="description"]');
+    if (descEl) descEl.setAttribute('content', meta.description);
+
+    const canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (canonicalEl) canonicalEl.setAttribute('href', meta.canonical);
+
+    const ogTitleEl = document.querySelector('meta[property="og:title"]');
+    if (ogTitleEl) ogTitleEl.setAttribute('content', meta.ogTitle);
+
+    const ogDescEl = document.querySelector('meta[property="og:description"]');
+    if (ogDescEl) ogDescEl.setAttribute('content', meta.ogDescription);
+
+    const ogUrlEl = document.querySelector('meta[property="og:url"]');
+    if (ogUrlEl) ogUrlEl.setAttribute('content', meta.canonical);
+
+    window.addEventListener('popstate', syncRouteFromLocation);
+    return () => window.removeEventListener('popstate', syncRouteFromLocation);
+  }, [currentPage]);
+
+  const handleNavigatePage = (page: PageKey, sectionId?: string) => {
+    const pageToPathMap: Record<PageKey, string> = {
+      home: '/',
+      about: '/about',
+      science: '/science',
+      mythology: '/mythology',
+      quiz: '/mirror-quiz',
+      'speaker-kit': '/speaker-kit',
+      waitlist: '/waitlist',
+    };
+
+    const targetPath = pageToPathMap[page] || '/';
+
+    if (typeof window !== 'undefined') {
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState({}, '', targetPath);
+      }
+    }
+
     setCurrentPage(page);
+
     if (page === 'home' && sectionId) {
       setTimeout(() => {
         const element = document.getElementById(sectionId);
@@ -54,7 +189,9 @@ export default function App() {
         }
       }, 100);
     } else {
-      window.scrollTo(0, 0);
+      if (typeof window !== 'undefined') {
+        window.scrollTo(0, 0);
+      }
     }
   };
 

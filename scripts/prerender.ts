@@ -4,8 +4,24 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { createServer } from 'vite';
 
+interface RouteConfig {
+  path: string;
+  pageKey: 'home' | 'about' | 'science' | 'mythology' | 'quiz' | 'speaker-kit' | 'waitlist';
+  outPath: string;
+}
+
+const ROUTES: RouteConfig[] = [
+  { path: '/', pageKey: 'home', outPath: 'index.html' },
+  { path: '/about', pageKey: 'about', outPath: 'about/index.html' },
+  { path: '/science', pageKey: 'science', outPath: 'science/index.html' },
+  { path: '/mythology', pageKey: 'mythology', outPath: 'mythology/index.html' },
+  { path: '/mirror-quiz', pageKey: 'quiz', outPath: 'mirror-quiz/index.html' },
+  { path: '/speaker-kit', pageKey: 'speaker-kit', outPath: 'speaker-kit/index.html' },
+  { path: '/waitlist', pageKey: 'waitlist', outPath: 'waitlist/index.html' },
+];
+
 async function prerender() {
-  console.log('Starting static pre-rendering (SSG)...');
+  console.log('Starting multi-page static pre-rendering (SSG)...');
   
   const distPath = path.resolve(process.cwd(), 'dist');
   const indexPath = path.join(distPath, 'index.html');
@@ -15,6 +31,9 @@ async function prerender() {
     process.exit(1);
   }
 
+  // Read the base template index.html produced by Vite
+  const templateHtml = fs.readFileSync(indexPath, 'utf-8');
+
   // Create a Vite dev server in SSR mode to safely load and transform image/css/tsx imports
   const vite = await createServer({
     server: { middlewareMode: true },
@@ -23,23 +42,58 @@ async function prerender() {
 
   try {
     // Dynamically load src/App.tsx through Vite SSR module loader
-    const { default: App } = await vite.ssrLoadModule('/src/App.tsx');
+    const { default: App, ROUTE_METADATA } = await vite.ssrLoadModule('/src/App.tsx');
 
-    // Render the App component to static HTML string
-    const appHtml = renderToString(React.createElement(App));
+    for (const route of ROUTES) {
+      console.log(`Pre-rendering route: ${route.path} -> dist/${route.outPath}`);
 
-    // Read the built index.html
-    let indexHtml = fs.readFileSync(indexPath, 'utf-8');
+      // Render the App component with initialPath for this route
+      const appHtml = renderToString(React.createElement(App, { initialPath: route.path }));
 
-    // Replace <div id="root"></div> with the pre-rendered HTML
-    if (indexHtml.includes('<div id="root"></div>')) {
-      indexHtml = indexHtml.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
-    } else if (indexHtml.includes('<div id="root">')) {
-      indexHtml = indexHtml.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${appHtml}</div>`);
+      let html = templateHtml;
+
+      // Update route-specific head metadata
+      const meta = ROUTE_METADATA ? ROUTE_METADATA[route.pageKey] : null;
+      if (meta) {
+        // Title
+        html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${meta.title}</title>`);
+        
+        // Description
+        html = html.replace(/<meta name="description" content="[^"]*"/, `<meta name="description" content="${meta.description}"`);
+
+        // Canonical URL
+        if (html.includes('<link rel="canonical"')) {
+          html = html.replace(/<link rel="canonical" href="[^"]*"\s*\/?>/, `<link rel="canonical" href="${meta.canonical}" />`);
+        } else {
+          html = html.replace('</head>', `  <link rel="canonical" href="${meta.canonical}" />\n</head>`);
+        }
+
+        // OpenGraph Title & Description & URL
+        html = html.replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${meta.ogTitle}"`);
+        html = html.replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${meta.ogDescription}"`);
+        html = html.replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${meta.canonical}"`);
+      }
+
+      // Inject rendered app HTML into root div
+      if (html.includes('<div id="root"></div>')) {
+        html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+      } else if (html.includes('<div id="root">')) {
+        html = html.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${appHtml}</div>`);
+      }
+
+      // Write output file
+      const targetFilePath = path.join(distPath, route.outPath);
+      const targetDirPath = path.dirname(targetFilePath);
+
+      if (!fs.existsSync(targetDirPath)) {
+        fs.mkdirSync(targetDirPath, { recursive: true });
+      }
+
+      fs.writeFileSync(targetFilePath, html, 'utf-8');
+      console.log(`✓ Wrote ${route.outPath} (${fs.statSync(targetFilePath).size} bytes)`);
     }
 
-    fs.writeFileSync(indexPath, indexHtml, 'utf-8');
-    console.log('Successfully injected pre-rendered static HTML into dist/index.html!');
+    console.log('Successfully pre-rendered all 7 static HTML routes!');
   } finally {
     await vite.close();
   }
@@ -49,3 +103,4 @@ prerender().catch((err) => {
   console.error('Error during static pre-rendering:', err);
   process.exit(1);
 });
+

@@ -37,9 +37,9 @@ A neuro-biological assessment tool that scans the subconscious hardware running 
 
 ## Key Links & Navigation
 - Home: https://thomasventura.com/
-- Science Matrix: https://thomasventura.com/#science
-- Mythology & Story: https://thomasventura.com/#mythology
-- About Thomas: https://thomasventura.com/#about
-- The Mirror Quiz: https://thomasventura.com/#quiz
-- Speaker Kit: https://thomasventura.com/#speaker-kit
-- Waitlist: https://thomasventura.com/#waitlist
+- About Thomas: https://thomasventura.com/about
+- Science Matrix: https://thomasventura.com/science
+- Mythology & Story: https://thomasventura.com/mythology
+- The Mirror Quiz: https://thomasventura.com/mirror-quiz
+- Speaker Kit: https://thomasventura.com/speaker-kit
+- Waitlist: https://thomasventura.com/waitlist

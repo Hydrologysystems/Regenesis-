@@ -80,8 +80,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-[1600px] mx-auto px-3 sm:px-8 lg:px-12 h-20 sm:h-24 flex items-center justify-between">
         
         {/* Editorial Brand Logo */}
-        <button 
-          onClick={() => handleNavClick('home')} 
+        <a 
+          href="/"
+          onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} 
           className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer text-left min-w-0"
         >
           <img 
@@ -98,58 +99,64 @@ export const Navbar: React.FC<NavbarProps> = ({
               The Regenesis Project
             </span>
           </div>
-        </button>
+        </a>
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-xs font-inter font-bold uppercase tracking-[0.2em]">
-          <button 
-            onClick={() => handleNavClick('home')} 
+          <a 
+            href="/"
+            onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} 
             className={getNavLinkClass('home')}
           >
             Home
-          </button>
+          </a>
 
-          <button 
-            onClick={() => handleNavClick('about')} 
+          <a 
+            href="/about"
+            onClick={(e) => { e.preventDefault(); handleNavClick('about'); }} 
             className={getNavLinkClass('about')}
           >
             About Me
-          </button>
+          </a>
 
-          <button 
-            onClick={() => handleNavClick('science')} 
+          <a 
+            href="/science"
+            onClick={(e) => { e.preventDefault(); handleNavClick('science'); }} 
             className={getNavLinkClass('science')}
           >
             The Science
-          </button>
+          </a>
 
-          <button 
-            onClick={() => handleNavClick('mythology')} 
+          <a 
+            href="/mythology"
+            onClick={(e) => { e.preventDefault(); handleNavClick('mythology'); }} 
             className={getNavLinkClass('mythology')}
           >
             The Mythology
-          </button>
+          </a>
 
         </div>
 
         {/* Right CTA Button */}
         <div className="hidden md:flex items-center space-x-4">
-          <button
-            onClick={() => handleNavClick('quiz')}
-            className={isScrolled || isScience ? "bg-gradient-to-r from-[#F2D075] via-[#C9962F] to-[#8C6218] hover:opacity-90 text-black h-12 px-8 text-xs uppercase tracking-[0.2em] font-inter font-extrabold cursor-pointer shadow-lg transition-all duration-300 rounded-sm border border-[#FFD700]/60" : "bg-[#1A1200] hover:bg-[#000000] text-white h-12 px-8 text-xs uppercase tracking-[0.2em] font-inter font-bold cursor-pointer shadow-md transition-all duration-300 rounded-sm border border-white/30"}
+          <a
+            href="/mirror-quiz"
+            onClick={(e) => { e.preventDefault(); handleNavClick('quiz'); }}
+            className={isScrolled || isScience ? "flex items-center justify-center bg-gradient-to-r from-[#F2D075] via-[#C9962F] to-[#8C6218] hover:opacity-90 text-black h-12 px-8 text-xs uppercase tracking-[0.2em] font-inter font-extrabold cursor-pointer shadow-lg transition-all duration-300 rounded-sm border border-[#FFD700]/60" : "flex items-center justify-center bg-[#1A1200] hover:bg-[#000000] text-white h-12 px-8 text-xs uppercase tracking-[0.2em] font-inter font-bold cursor-pointer shadow-md transition-all duration-300 rounded-sm border border-white/30"}
           >
             <span>Take Mirror Quiz</span>
-          </button>
+          </a>
         </div>
 
         {/* Mobile menu trigger */}
         <div className="lg:hidden flex items-center space-x-2 sm:space-x-3 shrink-0">
-          <button
-            onClick={() => handleNavClick('quiz')}
+          <a
+            href="/mirror-quiz"
+            onClick={(e) => { e.preventDefault(); handleNavClick('quiz'); }}
             className="px-2.5 py-1 sm:px-3 sm:py-1.5 border border-white text-white font-inter text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold rounded-xs cursor-pointer whitespace-nowrap"
           >
             Quiz
-          </button>
+          </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-1.5 text-white hover:text-black focus:outline-none cursor-pointer"
@@ -163,36 +170,41 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className={isScrolled ? "lg:hidden bg-[#0B0C0E]/98 backdrop-blur-xl border-b border-[#D4AF37]/30 px-5 sm:px-8 py-6 space-y-4 font-inter text-xs uppercase tracking-[0.2em] font-bold text-white animate-fadeIn shadow-2xl" : isScience ? "lg:hidden bg-[#040302]/95 backdrop-blur-xl border-b border-[#C9962F]/30 px-5 sm:px-8 py-6 space-y-4 font-inter text-xs uppercase tracking-[0.2em] font-bold text-white animate-fadeIn shadow-inner" : "lg:hidden bg-gradient-to-r from-[#7E4F11] via-[#E2B13D] to-[#7E4F11] border-b border-white/20 px-5 sm:px-8 py-6 space-y-4 font-inter text-xs uppercase tracking-[0.2em] font-bold text-white animate-fadeIn shadow-inner"}>
-          <button
-            onClick={() => handleNavClick('home')}
+          <a
+            href="/"
+            onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
             className={getMobileNavLinkClass('home')}
           >
             Home
-          </button>
-          <button
-            onClick={() => handleNavClick('about')}
+          </a>
+          <a
+            href="/about"
+            onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}
             className={getMobileNavLinkClass('about')}
           >
             About Me
-          </button>
-          <button
-            onClick={() => handleNavClick('science')}
+          </a>
+          <a
+            href="/science"
+            onClick={(e) => { e.preventDefault(); handleNavClick('science'); }}
             className={getMobileNavLinkClass('science')}
           >
             The Science
-          </button>
-          <button
-            onClick={() => handleNavClick('mythology')}
+          </a>
+          <a
+            href="/mythology"
+            onClick={(e) => { e.preventDefault(); handleNavClick('mythology'); }}
             className={getMobileNavLinkClass('mythology')}
           >
             The Mythology
-          </button>
-          <button
-            onClick={() => handleNavClick('quiz')}
+          </a>
+          <a
+            href="/mirror-quiz"
+            onClick={(e) => { e.preventDefault(); handleNavClick('quiz'); }}
             className={isScrolled || isScience ? "block w-full text-center py-3.5 bg-gradient-to-r from-[#F2D075] via-[#C9962F] to-[#8C6218] text-black font-inter text-xs uppercase tracking-[0.2em] font-extrabold rounded-sm border border-[#FFD700]/50" : "block w-full text-center py-3.5 bg-[#1A1200] text-white font-inter text-xs uppercase tracking-[0.2em] font-bold rounded-sm border border-white/20"}
           >
             Take Mirror Quiz
-          </button>
+          </a>
         </div>
       )}
     </nav>

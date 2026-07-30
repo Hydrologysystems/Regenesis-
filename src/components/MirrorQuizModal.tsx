@@ -83,6 +83,7 @@ export const MirrorQuizModal: React.FC<MirrorQuizModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
+          aria-label="Close modal"
           className="absolute top-6 right-6 p-2 text-[#1A1A1A] hover:text-[#D4AF37] border border-[#1A1A1A]/20 hover:border-[#D4AF37] transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
