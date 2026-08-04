@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
-  currentPage: 'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist';
-  onNavigatePage: (page: 'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist', sectionId?: string) => void;
+  currentPage: 'home' | 'science' | 'mythology' | 'about' | 'keynotes' | 'quiz' | 'speaker-kit' | 'waitlist';
+  onNavigatePage: (page: 'home' | 'science' | 'mythology' | 'about' | 'keynotes' | 'quiz' | 'speaker-kit' | 'waitlist', sectionId?: string) => void;
   onOpenMirrorQuiz: () => void;
   onOpenSpeakerKit: () => void;
   onOpenWaitlist: () => void;
@@ -36,12 +36,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (page: 'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist', sectionId?: string) => {
+  const handleNavClick = (page: 'home' | 'science' | 'mythology' | 'about' | 'keynotes' | 'quiz' | 'speaker-kit' | 'waitlist', sectionId?: string) => {
     setMobileMenuOpen(false);
     onNavigatePage(page, sectionId);
   };
 
-  const getNavLinkClass = (page: 'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist') => {
+  const getNavLinkClass = (page: 'home' | 'science' | 'mythology' | 'about' | 'keynotes' | 'quiz' | 'speaker-kit' | 'waitlist') => {
     const isActive = currentPage === page;
     if (isScrolled) {
       return `transition-colors duration-300 cursor-pointer ${isActive ? 'text-[#D4AF37] underline underline-offset-8 decoration-2 font-black' : 'text-[#E2E8F0] hover:text-[#D4AF37]'}`;
@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     return `transition-colors duration-300 cursor-pointer ${isActive ? 'text-[#000000] underline underline-offset-8 decoration-2 font-black' : 'text-[#FFFFFF] hover:text-[#000000]'}`;
   };
 
-  const getMobileNavLinkClass = (page: 'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist') => {
+  const getMobileNavLinkClass = (page: 'home' | 'science' | 'mythology' | 'about' | 'keynotes' | 'quiz' | 'speaker-kit' | 'waitlist') => {
     const isActive = currentPage === page;
     if (isScrolled || isScience) {
       return `block w-full text-left py-2 ${isActive ? 'text-[#D4AF37] font-black' : 'text-white hover:text-[#D4AF37]'}`;
@@ -91,12 +91,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             referrerPolicy="no-referrer"
             className="h-10 sm:h-12 lg:h-14 w-auto object-contain drop-shadow shrink-0"
           />
-          <div className="flex flex-col min-w-0">
-            <span className={`font-playfair font-bold text-sm sm:text-base lg:text-lg tracking-tight text-[#FFFFFF] transition-colors duration-500 truncate ${isScrolled || isScience ? 'group-hover:text-[#D4AF37]' : 'group-hover:text-amber-100'}`}>
+          <div className="flex flex-col items-start justify-center text-left min-w-0">
+            <span className={`font-playfair font-bold text-sm sm:text-base lg:text-lg tracking-wider leading-tight text-left text-[#FFFFFF] transition-colors duration-500 truncate ${isScrolled || isScience ? 'group-hover:text-[#D4AF37]' : 'group-hover:text-amber-100'}`}>
               THOMAS VENTURA
             </span>
-            <span className="font-inter text-[7px] sm:text-[8px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#FFFFFF]/85 font-bold group-hover:text-white transition-colors duration-500 -mt-0.5 truncate">
-              The Regenesis Project
+            <span className="font-inter text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-[#FFFFFF]/85 font-bold text-left group-hover:text-white transition-colors duration-500 leading-tight mt-0.5 truncate">
+              THE REGENESIS PROJECT
             </span>
           </div>
         </a>
@@ -116,7 +116,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={(e) => { e.preventDefault(); handleNavClick('about'); }} 
             className={getNavLinkClass('about')}
           >
-            About Me
+            About
+          </a>
+
+          <a 
+            href="/mythology"
+            onClick={(e) => { e.preventDefault(); handleNavClick('mythology'); }} 
+            className={getNavLinkClass('mythology')}
+          >
+            The Mythology
           </a>
 
           <a 
@@ -128,11 +136,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
 
           <a 
-            href="/mythology"
-            onClick={(e) => { e.preventDefault(); handleNavClick('mythology'); }} 
-            className={getNavLinkClass('mythology')}
+            href="/keynotes"
+            onClick={(e) => { e.preventDefault(); handleNavClick('keynotes'); }} 
+            className={getNavLinkClass('keynotes')}
           >
-            The Mythology
+            Keynotes
           </a>
 
         </div>
@@ -142,9 +150,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <a
             href="/mirror-quiz"
             onClick={(e) => { e.preventDefault(); handleNavClick('quiz'); }}
-            className={isScrolled || isScience ? "flex items-center justify-center bg-gradient-to-r from-[#F2D075] via-[#C9962F] to-[#8C6218] hover:opacity-90 text-black h-12 px-8 text-xs uppercase tracking-[0.2em] font-inter font-extrabold cursor-pointer shadow-lg transition-all duration-300 rounded-sm border border-[#FFD700]/60" : "flex items-center justify-center bg-[#1A1200] hover:bg-[#000000] text-white h-12 px-8 text-xs uppercase tracking-[0.2em] font-inter font-bold cursor-pointer shadow-md transition-all duration-300 rounded-sm border border-white/30"}
+            className={isScrolled || isScience ? "flex items-center justify-center bg-gradient-to-r from-[#F2D075] via-[#C9962F] to-[#8C6218] hover:opacity-90 text-black h-12 px-6 text-xs uppercase tracking-[0.2em] font-inter font-extrabold cursor-pointer shadow-lg transition-all duration-300 rounded-sm border border-[#FFD700]/60" : "flex items-center justify-center bg-[#1A1200] hover:bg-[#000000] text-white h-12 px-6 text-xs uppercase tracking-[0.2em] font-inter font-bold cursor-pointer shadow-md transition-all duration-300 rounded-sm border border-white/30"}
           >
-            <span>Take Mirror Quiz</span>
+            <span>Get Early Access</span>
           </a>
         </div>
 
@@ -155,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={(e) => { e.preventDefault(); handleNavClick('quiz'); }}
             className="px-2.5 py-1 sm:px-3 sm:py-1.5 border border-white text-white font-inter text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold rounded-xs cursor-pointer whitespace-nowrap"
           >
-            Quiz
+            Get Early Access
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -182,14 +190,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}
             className={getMobileNavLinkClass('about')}
           >
-            About Me
-          </a>
-          <a
-            href="/science"
-            onClick={(e) => { e.preventDefault(); handleNavClick('science'); }}
-            className={getMobileNavLinkClass('science')}
-          >
-            The Science
+            About
           </a>
           <a
             href="/mythology"
@@ -199,11 +200,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             The Mythology
           </a>
           <a
+            href="/science"
+            onClick={(e) => { e.preventDefault(); handleNavClick('science'); }}
+            className={getMobileNavLinkClass('science')}
+          >
+            The Science
+          </a>
+          <a
+            href="/keynotes"
+            onClick={(e) => { e.preventDefault(); handleNavClick('keynotes'); }}
+            className={getMobileNavLinkClass('keynotes')}
+          >
+            Keynotes
+          </a>
+          <a
             href="/mirror-quiz"
             onClick={(e) => { e.preventDefault(); handleNavClick('quiz'); }}
             className={isScrolled || isScience ? "block w-full text-center py-3.5 bg-gradient-to-r from-[#F2D075] via-[#C9962F] to-[#8C6218] text-black font-inter text-xs uppercase tracking-[0.2em] font-extrabold rounded-sm border border-[#FFD700]/50" : "block w-full text-center py-3.5 bg-[#1A1200] text-white font-inter text-xs uppercase tracking-[0.2em] font-bold rounded-sm border border-white/20"}
           >
-            Take Mirror Quiz
+            Get Early Access
           </a>
         </div>
       )}

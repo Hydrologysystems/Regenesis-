@@ -1,55 +1,36 @@
 import React from 'react';
-import { Activity, ShieldCheck, Zap, Dna } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-interface QuoteSectionProps {
-  onExploreScience?: () => void;
+interface ClosingBeatProps {
+  onOpenMirrorQuiz?: () => void;
 }
 
-export const QuoteSection: React.FC<QuoteSectionProps> = ({ onExploreScience }) => {
+export const QuoteSection: React.FC<ClosingBeatProps> = ({ onOpenMirrorQuiz }) => {
   return (
     <section 
-      id="science-section" 
-      className="relative bg-fixed bg-cover bg-center text-[#1A1A1A] py-28 px-6 sm:px-12 lg:px-16 border-b border-[#1A1A1A]/10 overflow-hidden"
-      style={{ backgroundImage: `url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=2000')` }}
+      className="relative bg-fixed bg-cover bg-center text-[#FFFFFF] py-28 px-6 sm:px-12 lg:px-16 border-t border-b border-[#C9962F]/30 overflow-hidden"
+      style={{ backgroundImage: `url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=2000')` }}
     >
-      {/* Light Overlay for Crisp Contrast and Subtle Parallax Depth */}
-      <div className="absolute inset-0 bg-[#FFFFFF]/90 backdrop-blur-[2px] z-0 pointer-events-none" />
+      {/* Dark Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/85 via-[#000000]/75 to-[#000000]/90 z-0 pointer-events-none" />
       
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        
-        {/* Centered Editorial Pull Quote */}
         <div className="flex flex-col items-center">
           
-          <div className="flex items-center gap-3 mb-6">
-            <span className="h-px w-10 bg-[#D4AF37]" />
-            <span className="font-inter text-xs uppercase tracking-[0.3em] font-semibold text-[#6C6863]">
-              Core Biological Doctrine
-            </span>
-            <span className="h-px w-10 bg-[#D4AF37]" />
-          </div>
+          <h2 className="font-playfair font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#FFFFFF] leading-tight tracking-tight mb-8 drop-shadow-lg">
+            Stop fighting your biology. <span className="bg-gradient-to-r from-[#FCE289] via-[#E2B13D] to-[#C9962F] bg-clip-text text-transparent">Command it.</span>
+          </h2>
 
-          <blockquote className="font-playfair font-normal text-3xl sm:text-4xl lg:text-5xl text-[#1A1A1A] leading-tight italic mb-8">
-            &ldquo;The hardest part of building a business isn&apos;t the Strategy. It is the subconscious war against your own <span className="not-italic text-[#D4AF37] border-b-2 border-[#D4AF37]">biological capacity</span>.&rdquo;
-          </blockquote>
-
-          <div className="flex items-center gap-4 pt-4 border-t border-[#1A1A1A]/15">
-            <div className="w-12 h-12 bg-[#1A1A1A] text-[#FFFFFF] flex items-center justify-center font-playfair font-bold text-lg">
-              TV
-            </div>
-            <div className="text-left">
-              <p className="font-playfair font-bold text-lg text-[#1A1A1A]">
-                Thomas Ventura
-              </p>
-              <p className="font-inter text-xs text-[#6C6863] uppercase tracking-[0.2em]">
-                Founder, The REGENESIS Project™
-              </p>
-            </div>
-          </div>
+          <button
+            onClick={onOpenMirrorQuiz}
+            className="h-14 px-10 rounded-xl bg-gradient-to-r from-[#7E4F11] via-[#C9962F] to-[#E2B13D] text-[#000000] font-inter font-black text-xs uppercase tracking-[0.2em] inline-flex items-center justify-center gap-3 cursor-pointer shadow-[0_4px_35px_rgba(226,177,61,0.5)] hover:shadow-[0_6px_45px_rgba(226,177,61,0.8)] hover:scale-105 transition-all duration-300"
+          >
+            <span>GET EARLY ACCESS TO THE MIRROR QUIZ</span>
+            <ArrowRight className="w-4 h-4 text-[#000000]" />
+          </button>
 
         </div>
-
       </div>
-
     </section>
   );
 };

@@ -11,7 +11,7 @@ export const RegenesisBanner: React.FC = () => {
           THE REGENESIS PROJECT
         </h2>
         <p className="text-sm sm:text-base font-medium tracking-[0.2em] text-[#1A1810] uppercase">
-          Recoding the Human Operating System™
+          Recoding the Operating System Beneath Your Habits™
         </p>
       </div>
     </section>

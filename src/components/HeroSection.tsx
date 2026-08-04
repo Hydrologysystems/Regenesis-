@@ -122,10 +122,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="mt-6 mb-8 max-w-3xl mx-auto p-5 sm:p-6 rounded-2xl bg-[#0c0804]/80 border border-[#3d2e1b] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.85)] relative overflow-hidden text-left sm:text-center">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-56 h-[1.5px] bg-gradient-to-r from-transparent via-[#E2B13D] to-transparent" />
           <p className="font-inter text-sm sm:text-base md:text-lg text-[#E6E1D5] leading-relaxed font-normal">
-            <span className="inline-block px-2.5 py-0.5 rounded bg-[#24170a] border border-[#E2B13D]/40 text-[#FCE289] font-bold text-xs sm:text-sm mr-2 mb-1 sm:mb-0 shadow-sm">
-              REGENESIS
-            </span>
-            is an identity-architecture framework that decodes the <span className="text-[#FCE289] font-semibold underline decoration-[#C9962F]/60 underline-offset-4">Survival Operating System (SOS)</span> beneath your habits and reconfigures the patterns subconsciously capping your capacity.
+            Your earliest years installed a Survival Operating System that still runs you today. REGENESIS decodes it — and reconfigures the patterns silently capping your capacity.
           </p>
         </div>
 
@@ -135,7 +132,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             onClick={onOpenMirrorQuiz}
             className="w-full sm:w-auto h-12 sm:h-14 px-8 sm:px-10 rounded-xl bg-gradient-to-r from-[#7E4F11] via-[#C9962F] to-[#E2B13D] text-[#000000] font-inter font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2.5 cursor-pointer shadow-[0_4px_30px_rgba(226,177,61,0.45)] hover:shadow-[0_6px_40px_rgba(226,177,61,0.7)] hover:scale-[1.02] transition-all duration-300"
           >
-            <span>GET STARTED</span>
+            <span>GET EARLY ACCESS TO THE MIRROR QUIZ</span>
             <ChevronRight className="w-4.5 h-4.5 text-[#000000]" />
           </button>
         </div>

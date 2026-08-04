@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Download, CheckCircle, Award } from 'lucide-react';
+import { X, CheckCircle2, Send, Award } from 'lucide-react';
 
 interface SpeakerKitModalProps {
   isOpen: boolean;
@@ -7,93 +7,176 @@ interface SpeakerKitModalProps {
 }
 
 export const SpeakerKitModal: React.FC<SpeakerKitModalProps> = ({ isOpen, onClose }) => {
-  const [downloaded, setDownloaded] = useState(false);
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    organization: '',
+    eventType: 'Conference',
+    eventDate: '',
+    notes: ''
+  });
 
   if (!isOpen) return null;
 
-  const handleDownload = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && name) {
-      setDownloaded(true);
-      setTimeout(() => {
-        setDownloaded(false);
-        setEmail('');
-        setName('');
-        onClose();
-      }, 2500);
+    if (formData.name && formData.email && formData.organization && formData.eventType) {
+      setSubmitted(true);
     }
   };
 
+  const handleCloseModal = () => {
+    setSubmitted(false);
+    setFormData({
+      name: '',
+      email: '',
+      organization: '',
+      eventType: 'Conference',
+      eventDate: '',
+      notes: ''
+    });
+    onClose();
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1A1A1A]/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-[#FFFFFF] border border-[#1A1A1A] p-8 sm:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] text-[#1A1A1A]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#000000]/85 backdrop-blur-md animate-fadeIn overflow-y-auto">
+      <div className="relative w-full max-w-xl bg-[#181818] border border-[#C9962F]/40 p-6 sm:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.8)] text-[#FFFFFF] my-8 rounded-2xl">
         
         <button
-          onClick={onClose}
+          onClick={handleCloseModal}
           aria-label="Close modal"
-          className="absolute top-6 right-6 p-2 text-[#1A1A1A] hover:text-[#D4AF37] border border-[#1A1A1A]/20 hover:border-[#D4AF37] transition-colors cursor-pointer"
+          className="absolute top-6 right-6 p-2 text-[#E6E1D5] hover:text-[#FCE289] border border-[#3A3328] hover:border-[#C9962F] rounded-full transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 text-[#D4AF37] font-inter font-semibold text-xs uppercase tracking-[0.25em] mb-2">
-            <Award className="w-4 h-4" />
-            <span>Official Event Assets</span>
+        <div className="mb-6">
+          <div className="inline-flex items-center gap-2 text-[#FCE289] font-mono font-semibold text-[11px] uppercase tracking-[0.25em] mb-2">
+            <Award className="w-4 h-4 text-[#C9962F]" />
+            <span>EXECUTIVE SPEAKER KIT</span>
           </div>
-          <h2 className="font-playfair font-normal text-3xl text-[#1A1A1A]">
-            EXECUTIVE SPEAKER KIT
+          <h2 className="font-playfair font-bold text-2xl sm:text-3xl text-[#FFFFFF]">
+            Request the Speaker Kit
           </h2>
-          <p className="font-inter text-xs text-[#6C6863] mt-2">
-            Includes high-res headshots, official bio, AV requirements, and keynote specs.
+          <p className="font-inter text-xs sm:text-sm text-[#A39E93] mt-2">
+            Tell us a little about your event and we'll send the kit straight over.
           </p>
         </div>
 
-        {downloaded ? (
-          <div className="p-4 bg-[#FFFDF0] border border-[#D4AF37]/50 text-[#1A1A1A] rounded text-xs flex items-center gap-3">
-            <CheckCircle className="w-5 h-5 text-[#D4AF37] shrink-0" />
-            <div>
-              <p className="font-bold">Speaker Kit Access Granted!</p>
-              <p className="text-[11px] text-[#6C6863]">The PDF kit and media assets package are downloading now.</p>
+        {submitted ? (
+          <div className="p-6 bg-[#1A2318] border border-[#4E8B3D]/60 rounded-xl text-[#E2F5DB] flex items-start gap-4">
+            <CheckCircle2 className="w-6 h-6 text-[#68D048] shrink-0 mt-0.5" />
+            <div className="space-y-2">
+              <p className="font-bold text-sm sm:text-base text-[#FFFFFF]">Request Received</p>
+              <p className="font-inter text-xs sm:text-sm leading-relaxed text-[#D2ECD0]">
+                On its way. Thanks — we'll get the speaker kit to you shortly. If your event has a firm date, mention it in your reply and we'll check availability at the same time.
+              </p>
+              <div className="pt-4">
+                <button
+                  onClick={handleCloseModal}
+                  className="px-6 py-2.5 rounded-lg bg-[#C9962F] text-[#000000] font-inter font-bold text-xs uppercase tracking-wider cursor-pointer hover:bg-[#FCE289] transition-colors"
+                >
+                  Close Window
+                </button>
+              </div>
             </div>
           </div>
         ) : (
-          <form onSubmit={handleDownload} className="space-y-6 font-inter text-xs">
+          <form onSubmit={handleSubmit} className="space-y-5 font-inter text-xs sm:text-sm">
             <div>
-              <label className="block text-[#1A1A1A] font-semibold mb-2 uppercase tracking-wider">Full Name</label>
+              <label className="block text-[#E6E1D5] font-semibold mb-1.5 uppercase tracking-wider text-[10px]">
+                Name <span className="text-[#C9962F]">*</span>
+              </label>
               <input
                 type="text"
                 required
-                placeholder="e.g. Sarah Jenkins"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="input-editorial w-full"
+                placeholder="Your full name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full h-11 px-4 rounded-lg bg-[#0F0F0F] border border-[#3A3328] text-[#FFFFFF] placeholder-[#555047] focus:outline-none focus:border-[#C9962F] transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-[#1A1A1A] font-semibold mb-2 uppercase tracking-wider">Organization / Event Email</label>
+              <label className="block text-[#E6E1D5] font-semibold mb-1.5 uppercase tracking-wider text-[10px]">
+                Email <span className="text-[#C9962F]">*</span>
+              </label>
               <input
                 type="email"
                 required
-                placeholder="sarah@enterprise.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input-editorial w-full"
+                placeholder="you@organization.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full h-11 px-4 rounded-lg bg-[#0F0F0F] border border-[#3A3328] text-[#FFFFFF] placeholder-[#555047] focus:outline-none focus:border-[#C9962F] transition-colors"
               />
             </div>
 
-            <div className="pt-4">
-              <button
-                type="submit"
-                className="btn-gold-slide h-14 w-full text-xs uppercase tracking-[0.2em] font-inter font-medium flex items-center justify-center gap-2 cursor-pointer shadow-lg"
-              >
-                <Download className="w-4 h-4 text-[#D4AF37]" />
-                <span>Download PDF Speaker Kit</span>
-              </button>
+            <div>
+              <label className="block text-[#E6E1D5] font-semibold mb-1.5 uppercase tracking-wider text-[10px]">
+                Organization <span className="text-[#C9962F]">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="Company or event organization"
+                value={formData.organization}
+                onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                className="w-full h-11 px-4 rounded-lg bg-[#0F0F0F] border border-[#3A3328] text-[#FFFFFF] placeholder-[#555047] focus:outline-none focus:border-[#C9962F] transition-colors"
+              />
             </div>
+
+            <div>
+              <label className="block text-[#E6E1D5] font-semibold mb-1.5 uppercase tracking-wider text-[10px]">
+                Event type <span className="text-[#C9962F]">*</span>
+              </label>
+              <select
+                required
+                value={formData.eventType}
+                onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
+                className="w-full h-11 px-4 rounded-lg bg-[#0F0F0F] border border-[#3A3328] text-[#FFFFFF] focus:outline-none focus:border-[#C9962F] transition-colors"
+              >
+                <option value="Conference">Conference</option>
+                <option value="Leadership offsite">Leadership offsite</option>
+                <option value="Accelerator or founder program">Accelerator or founder program</option>
+                <option value="Sales or team event">Sales or team event</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[#E6E1D5] font-semibold mb-1.5 uppercase tracking-wider text-[10px]">
+                Event date (or approximate)
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. Q4 2026 or October 15, 2026"
+                value={formData.eventDate}
+                onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
+                className="w-full h-11 px-4 rounded-lg bg-[#0F0F0F] border border-[#3A3328] text-[#FFFFFF] placeholder-[#555047] focus:outline-none focus:border-[#C9962F] transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[#E6E1D5] font-semibold mb-1.5 uppercase tracking-wider text-[10px]">
+                Anything we should know
+              </label>
+              <textarea
+                rows={2}
+                placeholder="Theme, audience size, key focus areas..."
+                value={formData.notes}
+                onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                className="w-full p-3 rounded-lg bg-[#0F0F0F] border border-[#3A3328] text-[#FFFFFF] placeholder-[#555047] focus:outline-none focus:border-[#C9962F] transition-colors resize-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full h-12 rounded-xl bg-gradient-to-r from-[#7E4F11] via-[#C9962F] to-[#E2B13D] text-[#000000] font-inter font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-2 cursor-pointer shadow-[0_4px_25px_rgba(226,177,61,0.35)] hover:shadow-[0_6px_35px_rgba(226,177,61,0.6)] transition-all"
+            >
+              <span>SEND ME THE KIT</span>
+              <Send className="w-4 h-4 text-[#000000]" />
+            </button>
           </form>
         )}
 

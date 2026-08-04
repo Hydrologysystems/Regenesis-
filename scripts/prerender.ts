@@ -6,13 +6,14 @@ import { createServer } from 'vite';
 
 interface RouteConfig {
   path: string;
-  pageKey: 'home' | 'about' | 'science' | 'mythology' | 'quiz' | 'speaker-kit' | 'waitlist';
+  pageKey: 'home' | 'about' | 'keynotes' | 'science' | 'mythology' | 'quiz' | 'speaker-kit' | 'waitlist';
   outPath: string;
 }
 
 const ROUTES: RouteConfig[] = [
   { path: '/', pageKey: 'home', outPath: 'index.html' },
   { path: '/about', pageKey: 'about', outPath: 'about/index.html' },
+  { path: '/keynotes', pageKey: 'keynotes', outPath: 'keynotes/index.html' },
   { path: '/science', pageKey: 'science', outPath: 'science/index.html' },
   { path: '/mythology', pageKey: 'mythology', outPath: 'mythology/index.html' },
   { path: '/mirror-quiz', pageKey: 'quiz', outPath: 'mirror-quiz/index.html' },
@@ -97,6 +98,7 @@ async function prerender() {
   } finally {
     await vite.close();
   }
+  process.exit(0);
 }
 
 prerender().catch((err) => {

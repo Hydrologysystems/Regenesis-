@@ -44,7 +44,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
               </p>
               <h4 className="font-playfair font-bold text-base text-[#1A1A1A]">1. Intellectual Property</h4>
               <p>
-                All content, frameworks, trade names, including "The REGENESIS Project™", "Survival Operating System (SOS)", and "Optimized Neural Evolution (Q.N.E.)", are the exclusive property of Thomas Ventura.
+                All content, frameworks, trade names, including "The REGENESIS Project™", "Survival Operating System (SOS)", and "Optimized Neuro-Biological Evolution (O.N.E.)", are the exclusive property of Thomas Ventura.
               </p>
               <h4 className="font-playfair font-bold text-base text-[#1A1A1A]">2. Keynotes & Advisory</h4>
               <p>
@@ -58,11 +58,11 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
               </p>
               <h4 className="font-playfair font-bold text-base text-[#1A1A1A]">1. Information Collection</h4>
               <p>
-                We collect personal information (e.g. name, email, organization) strictly when voluntarily provided for newsletter subscription, quiz diagnostics, or keynote inquiries.
+                We collect personal information (e.g. name, email, organization) strictly when voluntarily provided for newsletter subscription, quiz assessments, or keynote inquiries.
               </p>
               <h4 className="font-playfair font-bold text-base text-[#1A1A1A]">2. Confidentiality Guarantee</h4>
               <p>
-                We never sell, lease, or distribute executive contact details or quiz diagnostic scores to third parties.
+                We never sell, lease, or distribute executive contact details or quiz assessment scores to third parties.
               </p>
             </>
           )}

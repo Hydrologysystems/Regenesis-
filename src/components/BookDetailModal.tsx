@@ -53,7 +53,7 @@ export const BookDetailModal: React.FC<BookDetailModalProps> = ({ book, onClose 
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1A1A1A] text-[#FFFFFF] font-inter font-semibold text-xs uppercase tracking-[0.2em] mb-3">
                 <Calendar className="w-3.5 h-3.5 text-[#D4AF37]" />
-                <span>Amazon Drop Date: {book.dropDate}</span>
+                <span>Target Release: {book.dropDate}</span>
               </div>
 
               <h2 className="font-playfair font-normal text-3xl sm:text-4xl text-[#1A1A1A] mb-2">
@@ -90,7 +90,7 @@ export const BookDetailModal: React.FC<BookDetailModalProps> = ({ book, onClose 
           {/* Drop Notification Form */}
           <div className="pt-6 border-t border-[#1A1A1A]/15">
             <h4 className="font-playfair font-bold text-lg text-[#1A1A1A] mb-3">
-              Get Notified First When Drop Opens on Amazon
+              Get Notified First When Pre-Orders Open
             </h4>
 
             {notified ? (

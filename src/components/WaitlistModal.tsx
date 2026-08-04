@@ -46,7 +46,7 @@ export const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose })
             BOOK RELEASE WAITLIST
           </h2>
           <p className="font-inter text-xs text-[#6C6863] mt-2">
-            Reserve your place for signed hardcovers and Amazon launch notifications.
+            Reserve your place for signed hardcovers and priority launch notifications.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose })
             <CheckCircle className="w-5 h-5 text-[#D4AF37] shrink-0" />
             <div>
               <p className="font-bold">Added to VIP Waitlist!</p>
-              <p className="text-[11px] text-[#6C6863]">You will receive priority access when Amazon pre-orders go live.</p>
+              <p className="text-[11px] text-[#6C6863]">You will receive priority access when pre-orders go live.</p>
             </div>
           </div>
         ) : (

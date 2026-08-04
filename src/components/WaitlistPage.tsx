@@ -186,7 +186,7 @@ export const WaitlistPage: React.FC<WaitlistPageProps> = ({
                   The $25 Early-Bird Credit
                 </h3>
                 <p className="text-xs sm:text-sm font-medium font-sans leading-relaxed text-black/90">
-                  A direct discount on your purchase once the books are live on Amazon.
+                  A direct discount on your purchase once the books are released.
                 </p>
               </div>
 

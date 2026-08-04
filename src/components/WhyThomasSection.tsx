@@ -57,11 +57,11 @@ export const WhyThomasSection: React.FC = () => {
               </div>
 
               <h3 className="font-playfair font-bold text-2xl text-[#111111] mb-3 group-hover:text-[#B8860B] transition-colors">
-                THE "CFO" TEST
+                THE STORY IS TRUE
               </h3>
 
               <p className="font-sans text-xs sm:text-sm text-[#4A4843] leading-relaxed">
-                Thomas doesn’t speak in "wellness fluff." He speaks the language of Asset Management. He frames Burnout as "Key-Person Risk" and Survival Conditioning as "Operational Inefficiency."
+                Thomas didn't learn this in a lab. He reverse-engineered it out of an actual war zone, actual poverty, and fifteen years of running two companies at once — decoding his own machine because his life depended on it.
               </p>
             </div>
           </div>
@@ -78,7 +78,7 @@ export const WhyThomasSection: React.FC = () => {
               </h3>
 
               <p className="font-sans text-xs sm:text-sm text-[#4A4843] leading-relaxed">
-                Thomas brings the presence of a veteran operator. He validates the "Internal War" high-performers feel but never talk about, creating immediate trust with the most skeptical leaders in the room.
+                Thomas brings the presence of a veteran operator. He validates the "Internal War" high-performers feel but never talk about, creating immediate trust with the most skeptical people in the room.
               </p>
             </div>
           </div>

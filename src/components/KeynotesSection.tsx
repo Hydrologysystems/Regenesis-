@@ -24,7 +24,7 @@ const KEYNOTES_LIST: KeynoteDetail[] = [
     id: "keynote-1",
     numberLabel: "KEYNOTE 1",
     title: "THE BIOLOGY OF BUSINESS BEHAVIOR",
-    subtitle: "Recoding the Human Operating System™",
+    subtitle: "Recoding the Operating System Beneath Your Habits™",
     para1: "Strategy is logic, but behavior is chemistry. If you are fighting an \"Internal War\" between your will to scale and your urge to pull back, it isn't a mindset flaw. It is a hardware limitation.",
     para2Html: (
       <>
@@ -46,7 +46,7 @@ const KEYNOTES_LIST: KeynoteDetail[] = [
     para1: "Motivation runs out. Coherent Biology doesn't—it's a renewable engine. When you hit a growth ceiling, it's often your biology, not the market, resisting expansion. Your body sees growth as a threat and instinctively slows you down to protect you.",
     para2Html: (
       <>
-        Stop running your leadership on adrenaline and cortisol. Learn the <strong className="font-bold text-black">REGENESIS Protocol™</strong>—the blueprint for upgrading your internal hardware to sustain exponential scale without the burnout.
+        Stop running your leadership on emergency stress reserves. Learn the <strong className="font-bold text-black">REGENESIS Protocol™</strong>—the blueprint for upgrading your internal hardware to sustain exponential scale without the burnout.
       </>
     ),
     fullDescription: "Designed for C-suite executives, founders, and high-performance teams, this session delivers the 4-pillar tactical framework for neuro-biological capacity expansion and sustainable corporate longevity.",

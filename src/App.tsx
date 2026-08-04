@@ -9,6 +9,10 @@ import { WhyThomasSection } from './components/WhyThomasSection';
 import { KeynotesSection } from './components/KeynotesSection';
 import { AudienceSection } from './components/AudienceSection';
 import { CallToActionBanner } from './components/CallToActionBanner';
+import { KeynotesPage } from './components/KeynotesPage';
+import { KeynoteHomeBanner } from './components/KeynoteHomeBanner';
+import { MidPageQuizCTA } from './components/MidPageQuizCTA';
+import { QuoteSection } from './components/QuoteSection';
 import { SciencePage } from './components/SciencePage';
 import { MythologyPage } from './components/MythologyPage';
 import { AboutPage } from './components/AboutPage';
@@ -30,7 +34,7 @@ import { LegalModal } from './components/LegalModal';
 
 import { BookInfo, KeynoteInfo } from './types';
 
-export type PageKey = 'home' | 'science' | 'mythology' | 'about' | 'quiz' | 'speaker-kit' | 'waitlist';
+export type PageKey = 'home' | 'science' | 'mythology' | 'about' | 'keynotes' | 'quiz' | 'speaker-kit' | 'waitlist';
 
 export interface RouteMeta {
   title: string;
@@ -42,59 +46,67 @@ export interface RouteMeta {
 
 export const ROUTE_METADATA: Record<PageKey, RouteMeta> = {
   home: {
-    title: "Thomas Ventura — The Regenesis Project & Human Operating System (HOS™)",
-    description: "Official portal for Thomas Ventura, featuring the 10 Lenses of Science, The Mirror Quiz, Signature Keynotes, Speaker Kit, and Book Trilogy.",
+    title: "Thomas Ventura — The REGENESIS Project™",
+    description: "Official portal for Thomas Ventura, featuring the Twelve Lenses of Science, The Mirror Quiz, Signature Keynotes, Speaker Kit, and Book Trilogy.",
     canonical: "https://thomasventura.com/",
-    ogTitle: "Thomas Ventura — The Regenesis Project & Human Operating System (HOS™)",
-    ogDescription: "Recoding executive performance through nervous system coherence, biological capacity, and the Human Operating System.",
+    ogTitle: "Thomas Ventura — The REGENESIS Project™",
+    ogDescription: "Decodes the Survival Operating System (SOS) beneath habits and reconfigures the patterns silently capping your capacity.",
   },
   about: {
-    title: "About Thomas Ventura — Neuro-Biological Systems Architect & Author",
-    description: "From a war-zone refugee to multi-million dollar business operator, Thomas Ventura decodes the biological capacity and nervous system coherence capping executive leadership.",
+    title: "About Thomas Ventura — Systems Architect & Author | REGENESIS",
+    description: "From a war-zone refugee to multi-million dollar operator over 18+ years across two companies, Thomas Ventura decodes the Survival Operating System (SOS) beneath habits.",
     canonical: "https://thomasventura.com/about",
-    ogTitle: "About Thomas Ventura — Neuro-Biological Systems Architect & Author",
-    ogDescription: "Discover the journey, executive experience, and biological framework of Thomas Ventura.",
+    ogTitle: "About Thomas Ventura — Systems Architect & Author",
+    ogDescription: "Discover the journey, operator experience, and framework of Thomas Ventura.",
+  },
+  keynotes: {
+    title: "Keynotes — Thomas Ventura | The REGENESIS Project™",
+    description: "Keynote speaking for teams, events, and organizations. Thomas Ventura on why biology — not strategy — becomes the ceiling on performance, and what it takes to move it.",
+    canonical: "https://thomasventura.com/keynotes",
+    ogTitle: "Keynotes — Thomas Ventura | The REGENESIS Project™",
+    ogDescription: "Keynote speaking for teams, events, and organizations. Thomas Ventura on why biology — not strategy — becomes the ceiling on performance, and what it takes to move it.",
   },
   science: {
-    title: "The 10 Lenses of Science — Human Operating System (HOS™) | Thomas Ventura",
-    description: "Explore the 10 scientific disciplines (Neuroscience, Cybernetics, Polyvagal Theory, Epigenetics, Bio-Energetics, and more) powering The Regenesis Project.",
+    title: "The Twelve Lenses of Science — REGENESIS | Thomas Ventura",
+    description: "Explore the Twelve Lenses of Science across Four Blocks (Neuroscience, Biophysics, Somatic Science, Bio-Energetics, Epigenetics, Autonomic Regulation, Cybernetics, Memory Science, and more) powering REGENESIS.",
     canonical: "https://thomasventura.com/science",
-    ogTitle: "The 10 Lenses of Science — Human Operating System (HOS™)",
-    ogDescription: "A bio-digital framework integrating 10 scientific disciplines for executive performance and capacity.",
+    ogTitle: "The Twelve Lenses of Science — REGENESIS",
+    ogDescription: "A rigorous-heuristic identity-architecture framework integrating Twelve Lenses of Science.",
   },
   mythology: {
-    title: "The Mythology & Origin Story — Thomas Ventura & The Regenesis Project",
-    description: "The origin story of Thomas Ventura and the archetypal transformation from Survival Operating System to Quantum Neural Execution.",
+    title: "The Mythology — The Theater of Identity | The REGENESIS Project™",
+    description: "The story layer of REGENESIS: the eight universal forces every human system runs under pressure — and what it takes to command them in an integrated state.",
     canonical: "https://thomasventura.com/mythology",
-    ogTitle: "The Mythology & Origin Story — Thomas Ventura",
-    ogDescription: "Decoding the origin story and archetypal journey from survival to high-performance neural execution.",
+    ogTitle: "The Mythology — The Theater of Identity | The REGENESIS Project™",
+    ogDescription: "The story layer of REGENESIS: the eight universal forces every human system runs under pressure — and what it takes to command them in an integrated state.",
   },
   quiz: {
-    title: "The Mirror Quiz — Neuro-Biological Executive Capacity Assessment",
-    description: "Take The Mirror Quiz to analyze the subconscious hardware running beneath your habits and unlock your true executive operating capacity.",
+    title: "The Mirror Quiz — A Free System Scan | The REGENESIS Project",
+    description: "A free scan of the survival patterns running beneath your habits — and where they're quietly capping your capacity. Coming soon.",
     canonical: "https://thomasventura.com/mirror-quiz",
-    ogTitle: "The Mirror Quiz — Neuro-Biological Executive Capacity Assessment",
-    ogDescription: "Scan the subconscious hardware running beneath your executive decisions and habits.",
+    ogTitle: "The Mirror Quiz — A Free System Scan | The REGENESIS Project",
+    ogDescription: "A free scan of the survival patterns running beneath your habits — and where they're quietly capping your capacity. Coming soon.",
   },
   'speaker-kit': {
-    title: "Speaker Kit & Keynotes — Thomas Ventura | Executive Summits & Keynotes",
-    description: "Keynote speeches, speaker requirements, bio downloads, and booking details for Thomas Ventura at global leadership summits and executive retreats.",
+    title: "Speaker Kit & Keynotes — Thomas Ventura | REGENESIS",
+    description: "Keynote speeches, speaker requirements, bio downloads, and booking details for Thomas Ventura at leadership summits and executive retreats.",
     canonical: "https://thomasventura.com/speaker-kit",
     ogTitle: "Speaker Kit & Keynotes — Thomas Ventura",
     ogDescription: "Book Thomas Ventura for keynotes, executive retreats, and corporate summits.",
   },
   waitlist: {
-    title: "Book Drop Waitlist & Cohorts — Thomas Ventura | Biological Architecture",
-    description: "Join the private waitlist for Thomas Ventura's upcoming book trilogy on Biological Architecture, Cybernetic Leadership, and Epigenetic Freedom.",
+    title: "Book Drop Waitlist — Thomas Ventura | The REGENESIS Project™",
+    description: "Join the private waitlist for Thomas Ventura's upcoming book trilogy: Book One (The Survival Source Code — Coming 2027), Book Two, and Book Three.",
     canonical: "https://thomasventura.com/waitlist",
-    ogTitle: "Book Drop Waitlist & Cohorts — Thomas Ventura",
-    ogDescription: "Reserve your spot for confidential book drops and executive cohorts.",
+    ogTitle: "Book Drop Waitlist — Thomas Ventura",
+    ogDescription: "Reserve your spot for upcoming book drops and private cohorts.",
   },
 };
 
 export const getPageFromPath = (path: string): PageKey => {
   const cleanPath = path.toLowerCase().replace(/\/$/, '') || '/';
   if (cleanPath === '/about') return 'about';
+  if (cleanPath === '/keynotes' || cleanPath === '/keynote') return 'keynotes';
   if (cleanPath === '/science') return 'science';
   if (cleanPath === '/mythology') return 'mythology';
   if (cleanPath === '/mirror-quiz' || cleanPath === '/quiz') return 'quiz';
@@ -164,6 +176,7 @@ export default function App({ initialPath }: AppProps) {
     const pageToPathMap: Record<PageKey, string> = {
       home: '/',
       about: '/about',
+      keynotes: '/keynotes',
       science: '/science',
       mythology: '/mythology',
       quiz: '/mirror-quiz',
@@ -255,6 +268,11 @@ export default function App({ initialPath }: AppProps) {
                 onOpenWaitlist={handleOpenWaitlist}
                 onOpenMirrorQuiz={() => handleNavigatePage('quiz')}
               />
+            ) : currentPage === 'keynotes' ? (
+              <KeynotesPage 
+                onOpenBooking={() => setContactOpen(true)}
+                onOpenSpeakerKit={handleOpenSpeakerKit}
+              />
             ) : currentPage === 'quiz' ? (
               <QuizPrepPage 
                 onStartQuiz={() => setQuizOpen(true)}
@@ -272,54 +290,54 @@ export default function App({ initialPath }: AppProps) {
               />
             ) : (
               <>
-                {/* Hero Section: Meet Thomas Ventura */}
+                {/* Section 1 — Hero */}
                 <HeroSection 
                   onOpenMirrorQuiz={() => handleNavigatePage('quiz')}
                   onOpenSpeakerKit={handleOpenSpeakerKit}
                   onOpenWaitlist={handleOpenWaitlist}
                 />
 
-                {/* The Regenesis Project Banner */}
-                <ScrollReveal yOffset={16}>
-                  <RegenesisBanner />
-                </ScrollReveal>
-
-                {/* Book Drops Section */}
-                <ScrollReveal delay={0.1}>
-                  <BooksSection 
-                    onSelectBook={(book) => setSelectedBook(book)} 
-                  />
-                </ScrollReveal>
-
-                {/* Biological Architecture & Science Manifesto Section */}
-                <ScrollReveal delay={0.1}>
-                  <ScienceManifesto />
-                </ScrollReveal>
-
-                {/* Why Thomas? (Inverted Dark Section) */}
-                <ScrollReveal delay={0.1}>
-                  <WhyThomasSection />
-                </ScrollReveal>
-
-                {/* Signature Keynotes Section */}
-                <ScrollReveal delay={0.1}>
-                  <KeynotesSection 
-                    onSelectKeynote={(keynote) => setSelectedKeynote(keynote)} 
-                    onOpenBooking={() => setContactOpen(true)}
-                  />
-                </ScrollReveal>
-
-                {/* Target Audience Section */}
+                {/* Section 2 — Who This Is For */}
                 <ScrollReveal delay={0.1}>
                   <AudienceSection />
                 </ScrollReveal>
 
-                {/* Call-To-Action Banner */}
+                {/* Section 3 — The Core Thesis */}
                 <ScrollReveal delay={0.1}>
-                  <CallToActionBanner 
-                    onOpenSpeakerKit={handleOpenSpeakerKit}
-                    onOpenContact={() => setContactOpen(true)}
+                  <ScienceManifesto />
+                </ScrollReveal>
+
+                {/* Section 4 — Why Thomas Ventura */}
+                <ScrollReveal delay={0.1}>
+                  <WhyThomasSection />
+                </ScrollReveal>
+
+                {/* Section 5 — Mid-Page Quiz CTA */}
+                <ScrollReveal delay={0.1}>
+                  <MidPageQuizCTA 
+                    onOpenMirrorQuiz={() => handleNavigatePage('quiz')} 
+                  />
+                </ScrollReveal>
+
+                {/* Section 6 — The Trilogy */}
+                <ScrollReveal delay={0.1}>
+                  <BooksSection 
+                    onSelectBook={(book) => setSelectedBook(book)} 
                     onOpenWaitlist={handleOpenWaitlist}
+                  />
+                </ScrollReveal>
+
+                {/* Section 7 — Keynotes Strip */}
+                <ScrollReveal delay={0.1}>
+                  <KeynoteHomeBanner 
+                    onExploreKeynotes={() => handleNavigatePage('keynotes')} 
+                  />
+                </ScrollReveal>
+
+                {/* Section 8 — The Closing Beat */}
+                <ScrollReveal delay={0.1}>
+                  <QuoteSection 
+                    onOpenMirrorQuiz={() => handleNavigatePage('quiz')} 
                   />
                 </ScrollReveal>
               </>

@@ -46,27 +46,27 @@ export const Footer: React.FC<FooterProps> = ({
                 src="https://res.cloudinary.com/ew2ztpgz/image/upload/v1784747450/Ventura_logo_version_2_3_copy_22_1_ei6hxv.png" 
                 alt="Thomas Ventura Logo" 
                 referrerPolicy="no-referrer"
-                className="h-12 w-auto object-contain"
+                className="h-12 w-auto object-contain shrink-0"
               />
-              <div>
-                <h3 className="font-playfair font-bold text-2xl text-[#1A1A1A] tracking-tight">
+              <div className="flex flex-col items-start justify-center text-left min-w-0">
+                <h3 className="font-playfair font-bold text-2xl text-[#1A1A1A] tracking-wider leading-tight text-left">
                   THOMAS VENTURA
                 </h3>
-                <p className="font-inter text-[9px] uppercase tracking-[0.3em] text-[#6C6863]">
-                  The Regenesis Project
+                <p className="font-inter text-[9px] uppercase tracking-[0.25em] text-[#6C6863] font-bold text-left leading-tight mt-0.5">
+                  THE REGENESIS PROJECT
                 </p>
               </div>
             </div>
             
             <p className="font-inter text-xs text-[#6C6863] leading-relaxed max-w-sm">
-              Recoding executive leadership performance through biological capacity, nervous system coherence, and operational source code.
+              Decoding the Survival Operating System — and ending the internal war against your own biology.
             </p>
           </div>
 
-          {/* Executive Access Links (3 Cols) */}
+          {/* Connect Links (3 Cols) */}
           <div className="lg:col-span-3 space-y-4">
             <p className="font-playfair font-bold text-sm text-[#1A1A1A] uppercase tracking-wider">
-              Executive Access
+              Connect
             </p>
             
             <ul className="space-y-3 font-inter text-xs text-[#6C6863]">
@@ -85,7 +85,7 @@ export const Footer: React.FC<FooterProps> = ({
                   className="hover:text-[#D4AF37] transition-colors font-semibold tracking-wider uppercase cursor-pointer flex items-center gap-2"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
-                  <span>Speaker Kit & Media</span>
+                  <span>Keynotes & Speaker Kit</span>
                 </button>
               </li>
               <li>
@@ -94,7 +94,7 @@ export const Footer: React.FC<FooterProps> = ({
                   className="hover:text-[#D4AF37] transition-colors font-semibold tracking-wider uppercase cursor-pointer flex items-center gap-2"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
-                  <span>Book Drop Waitlist</span>
+                  <span>Trilogy Waitlist</span>
                 </button>
               </li>
             </ul>
@@ -103,24 +103,24 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Newsletter Input (4 Cols) */}
           <div className="lg:col-span-4 space-y-4">
             <p className="font-playfair font-bold text-sm text-[#1A1A1A]">
-              Executive Dispatch
+              The REGENESIS Dispatch
             </p>
             
             <p className="font-inter text-xs text-[#6C6863] leading-relaxed">
-              Receive confidential dispatches on biological capacity, nervous system performance, and Amazon drop alerts.
+              Insights on the internal war — and how to win it.
             </p>
 
             {subscribed ? (
               <div className="p-3 bg-[#FFFDF0] border border-[#D4AF37]/50 text-xs font-inter text-[#1A1A1A] flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" />
-                <span>Subscribed to Executive Dispatch</span>
+                <span>Subscribed to The REGENESIS Dispatch</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 pt-2">
                 <input
                   type="email"
                   required
-                  placeholder="Enter your executive email"
+                  placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="input-editorial flex-1 text-xs font-inter"

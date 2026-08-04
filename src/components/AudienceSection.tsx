@@ -22,8 +22,8 @@ export const AudienceSection: React.FC = () => {
             </h2>
           </div>
 
-          <p className="font-inter text-xs uppercase tracking-[0.2em] text-[#6C6863] max-w-sm">
-            Specifically tailored for high-stakes leadership environments where human biological limits directly impact enterprise valuation.
+          <p className="font-inter text-xs sm:text-sm uppercase tracking-[0.2em] text-[#6C6863] max-w-md font-medium">
+            For anyone with the drive to build, lead, or create — who keeps hitting an invisible wall.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export const AudienceSection: React.FC = () => {
                 THE BOTTLENECK FOUNDER
               </h3>
               <p className="font-inter text-xs text-[#6C6863] leading-relaxed">
-                "The one doing it all." Entrepreneurs stuck in high-effort, low-return cycles—where "working harder" has stopped yielding results and started yielding burnout. Whether you run a local shop or a national brand, you are the lid on your own growth.
+                "The one doing it all." Entrepreneurs stuck in high-effort, low-return cycles — where "working harder" has stopped yielding results and started yielding burnout. Whether you run a local shop, a national brand, or a business from your kitchen table, you are the lid on your own growth.
               </p>
             </div>
           </div>
@@ -53,7 +53,7 @@ export const AudienceSection: React.FC = () => {
                 THE "RELUCTANT" DELEGATOR
               </h3>
               <p className="font-inter text-xs text-[#6C6863] leading-relaxed">
-                "The one who can't let go." Leaders who intellectually know they need to delegate, but whose nervous system codes "trust" as "danger." This is for operators whose need for control is actively preventing their team from stepping up.
+                "The one who can't let go." Builders who know they need to delegate, but whose nervous system codes "trust" as "danger." For anyone whose need for control is silently capping their team — or their life — from stepping up.
               </p>
             </div>
           </div>
@@ -67,7 +67,7 @@ export const AudienceSection: React.FC = () => {
                 THE CYCLE BREAKER
               </h3>
               <p className="font-inter text-xs text-[#6C6863] leading-relaxed">
-                "The one building without a blueprint." For the first-generation entrepreneur defying family history to leave the employee mindset and enter the arena of ownership. You are building from scratch with no trust fund to catch you if you fall. Thomas addresses the immense biological load of scaling an empire when you are the only safety net.
+                "The one building without a blueprint." The first-generation builder defying family history to leave the employee mindset and enter the arena of ownership. You are building from scratch with no safety net to catch you if you fall — and carrying the biological load of being the only one holding it all up.
               </p>
             </div>
           </div>
@@ -78,10 +78,10 @@ export const AudienceSection: React.FC = () => {
                 CATEGORY 04
               </div>
               <h3 className="font-playfair font-normal text-2xl text-[#1A1A1A] mb-3 group-hover:text-[#D4AF37] transition-colors">
-                ACCELERATORS & ORGANIZATIONS
+                THE PERFORMER WHO NEVER ARRIVES
               </h3>
               <p className="font-inter text-xs text-[#6C6863] leading-relaxed">
-                "The systems seeking stability." From local incubator programs to corporate retention initiatives. This is for organizations seeking infrastructure-first growth—moving beyond "self-care" fluff to install actual biological sustainability for their leadership teams.
+                "The one still chasing it." The creator, closer, or high-achiever who hits the milestone and feels the flinch instead of the win — constantly "on," chasing the next rank to quiet a hum that never goes quiet.
               </p>
             </div>
           </div>

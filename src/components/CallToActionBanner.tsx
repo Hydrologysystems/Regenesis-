@@ -54,11 +54,11 @@ export const CallToActionBanner: React.FC<CallToActionBannerProps> = ({
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-8 font-inter text-xs uppercase tracking-[0.2em] text-[#FFFFFF]/60">
-          <span>AMAZON TRILOGY DROPS 2026</span>
+          <span>BOOK ONE COMING 2027</span>
           <span>•</span>
           <span>CPG INDUSTRY VETERAN</span>
           <span>•</span>
-          <span>10-SCIENCE SOURCE CODE</span>
+          <span>TWELVE-LENS FRAMEWORK</span>
         </div>
 
       </div>

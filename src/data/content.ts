@@ -12,8 +12,8 @@ export const dnaGeneStemLogoImg = 'https://images.unsplash.com/photo-15076680771
 export const magnifierDnaZoomImg = 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=1200';
 
 export const SITE_METADATA = {
-  title: 'Thomas Ventura - Neuro-Biological Systems Architect',
-  description: 'Thomas Ventura codifies 10 biological sciences to transition enterprise leaders from S.O.S. to Q.N.E. capacity.',
+  title: 'Thomas Ventura — Systems Architect & Author',
+  description: 'Thomas Ventura integrates Twelve Lenses of Science to transition leaders from SOS to O.N.E. capacity.',
   socials: {
     linkedin: 'https://www.linkedin.com/in/thomasventura',
     youtube: 'https://www.youtube.com/@thomasventura',

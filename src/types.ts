@@ -1,4 +1,7 @@
+export type PageKey = 'home' | 'science' | 'mythology' | 'about' | 'keynotes' | 'quiz' | 'speaker-kit' | 'waitlist';
+
 export interface BookInfo {
+
   id: string;
   dropDate: string;
   title: string;
@@ -8,7 +11,7 @@ export interface BookInfo {
   chapters: string[];
   coverColor: string;
   coverImage?: string;
-  amazonDropUrl: string;
+  dropUrl: string;
 }
 
 export type Book = BookInfo;
@@ -31,6 +34,6 @@ export interface QuizQuestion {
   options: {
     label: string;
     points: number; // 1-4 points
-    category: 'SOS' | 'TRANSITION' | 'QNE';
+    category: 'SOS' | 'TRANSITION' | 'ONE';
   }[];
 }

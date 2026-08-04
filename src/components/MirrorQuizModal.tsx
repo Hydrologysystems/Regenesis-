@@ -1,202 +1,217 @@
 import React, { useState } from 'react';
-import { X, Sparkles, CheckCircle, RefreshCw, ArrowRight } from 'lucide-react';
-import { QUIZ_QUESTIONS } from '../data/siteData';
+import { Sparkles, X, CheckCircle2, Shield, ArrowRight, Bell, Mail } from 'lucide-react';
 
 interface MirrorQuizModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onOpenContact: () => void;
+  onSelectBookByTitle?: (title: string) => void;
+  onOpenContact?: () => void;
 }
 
-export const MirrorQuizModal: React.FC<MirrorQuizModalProps> = ({
-  isOpen,
-  onClose,
-  onOpenContact,
-}) => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [completed, setCompleted] = useState(false);
+export const MirrorQuizModal: React.FC<MirrorQuizModalProps> = ({ isOpen, onClose }) => {
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleOptionSelect = (points: number) => {
-    const updatedAnswers = [...answers, points];
-    setAnswers(updatedAnswers);
-
-    if (currentStep < QUIZ_QUESTIONS.length - 1) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      setCompleted(true);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setIsSubmitted(true);
     }
   };
-
-  const resetQuiz = () => {
-    setCurrentStep(0);
-    setAnswers([]);
-    setCompleted(false);
-  };
-
-  const totalScore = answers.reduce((a, b) => a + b, 0);
-
-  const getDiagnosis = () => {
-    if (totalScore <= 6) {
-      return {
-        title: 'SURVIVAL OPERATING SYSTEM (S.O.S.) — HIGH ADRENAL FRICTION',
-        badgeColor: 'bg-[#1A1A1A] text-[#D4AF37] border border-[#D4AF37]',
-        summary: 'Your nervous system is operating in acute threat-mitigation mode. Procrastination, micromanagement, and sudden fatigue are not mindset failures—they are your body protecting you from exceeding biological capacity.',
-        recommendations: [
-          'Immediate adrenal deceleration and cortisolic recalibration.',
-          'Identify key-person risk before delegate friction causes operational failure.',
-          'Read Book 1: "The Survival Source Code" upon Amazon drop.'
-        ]
-      };
-    } else if (totalScore <= 11) {
-      return {
-        title: 'TRANSITION ZONE — AT BIOLOGICAL CEILING',
-        badgeColor: 'bg-[#1A1A1A] text-[#D4AF37] border border-[#D4AF37]',
-        summary: 'You are intellectually aligned with growth, but your nervous system treats rapid expansion as a safety risk. You experience cycles of high productivity followed by unexplained exhaustion or friction.',
-        recommendations: [
-          'Systematically interrupt the "Control = Safety" neural response.',
-          'Re-engineer delegation trust structures to unlock organizational velocity.',
-          'Schedule a Keynote or Leadership Assessment with Thomas Ventura.'
-        ]
-      };
-    } else {
-      return {
-        title: 'OPTIMIZED NEURAL EVOLUTION (Q.N.E.) — COHERENT EXPANSION',
-        badgeColor: 'bg-[#1A1A1A] text-[#D4AF37] border border-[#D4AF37]',
-        summary: 'Your biological capacity is operating in alignment with your strategic vision. You are ready to scale 8-figure architecture without personal depletion or key-person bottlenecks.',
-        recommendations: [
-          'Install REGENESIS 365 Blueprint across executive leadership.',
-          'Audit supply chain and team capacity for 10x unrestricted expansion.'
-        ]
-      };
-    }
-  };
-
-  const currentQ = QUIZ_QUESTIONS[currentStep];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1A1A1A]/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-2xl bg-[#FFFFFF] border border-[#1A1A1A] p-8 sm:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] text-[#1A1A1A] max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-fadeIn overflow-y-auto">
+      <div className="relative w-full max-w-3xl bg-[#0B0D12] border border-[#D4AF37]/40 rounded-2xl p-6 sm:p-10 shadow-[0_0_60px_rgba(212,175,55,0.2)] text-white my-auto max-h-[92vh] overflow-y-auto">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          aria-label="Close modal"
-          className="absolute top-6 right-6 p-2 text-[#1A1A1A] hover:text-[#D4AF37] border border-[#1A1A1A]/20 hover:border-[#D4AF37] transition-colors cursor-pointer"
+          className="absolute top-5 right-5 text-gray-400 hover:text-[#D4AF37] p-2 rounded-full hover:bg-white/5 transition-colors cursor-pointer z-10"
+          aria-label="Close"
         >
-          <X className="w-5 h-5" />
+          <X className="w-6 h-6" />
         </button>
 
-        {/* Header */}
-        <div className="mb-8 pb-6 border-b border-[#1A1A1A]/15">
-          <div className="inline-flex items-center gap-2 text-[#D4AF37] font-inter font-semibold text-xs uppercase tracking-[0.25em] mb-2">
-            <Sparkles className="w-4 h-4" />
-            <span>Biological Capacity Diagnostic</span>
+        {/* SECTION 1 — HERO */}
+        <div className="mb-10 text-left">
+          {/* Top Eyebrow & Gold COMING SOON Badge */}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181A22] border border-[#D4AF37]/40 text-[#D4AF37] text-xs font-mono font-bold tracking-widest uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span>THE MIRROR QUIZ</span>
+            </div>
+
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/60 text-[#F3E5AB] text-xs font-mono font-extrabold tracking-widest uppercase shadow-[0_0_12px_rgba(212,175,55,0.25)]">
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
+              <span>COMING SOON</span>
+            </span>
           </div>
-          
-          <h2 className="font-playfair font-bold text-3xl sm:text-4xl text-[#1A1A1A]">
-            THE MIRROR QUIZ
+
+          {/* Main Headline */}
+          <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-[#F9FAFB] tracking-tight leading-tight mb-4">
+            A free system scan of the machine you actually run on.
           </h2>
-          
-          <p className="font-inter text-xs text-[#6C6863] mt-2">
-            Decode whether your business is capped by strategy or nervous system capacity.
+
+          {/* Intro Paragraph */}
+          <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed mb-6">
+            Most assessments tell you what you&apos;re like. This one reads what&apos;s running underneath — the survival patterns written into your system long before you chose any of them, and where they&apos;re silently capping your capacity.
           </p>
+
+          {/* Subtext */}
+          <p className="text-xs sm:text-sm text-[#F3E5AB] font-semibold mb-6">
+            The Mirror Quiz is being built now. Put your name down and you&apos;ll be among the first to run it.
+          </p>
+
+          {/* Email Capture Form / Success Banner */}
+          {isSubmitted ? (
+            <div className="p-5 rounded-xl bg-[#131A14] border border-green-500/40 text-green-300 text-sm flex items-start gap-3 animate-fadeIn">
+              <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0 mt-0.5" />
+              <div>
+                <strong className="block font-bold text-white mb-1">You&apos;re on the early access list.</strong>
+                <p className="text-xs text-gray-300">We&apos;ll send you a single notification email the moment the Mirror Quiz goes live.</p>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl mb-3">
+              <div className="relative flex-1">
+                <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email address"
+                  required
+                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-[#141720] border border-[#D4AF37]/30 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[#D4AF37] transition-colors"
+                />
+              </div>
+              <button
+                type="submit"
+                className="px-8 py-3 rounded-lg bg-gradient-to-r from-[#D4AF37] via-[#C5A028] to-[#9A7B2C] text-[#090A0C] font-extrabold text-xs uppercase tracking-widest hover:brightness-110 transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap"
+              >
+                <Bell className="w-4 h-4" />
+                <span>NOTIFY ME</span>
+              </button>
+            </form>
+          )}
+
+          <p className="text-[11px] text-gray-500 font-mono">
+            No spam. One email when it&apos;s live.
+          </p>
+
+          {/* Three Badges */}
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-6 pt-6 border-t border-gray-800/80 text-xs text-gray-300">
+            <span className="px-3 py-1 rounded bg-[#151822] border border-[#D4AF37]/20 text-[#F3E5AB] font-mono text-[11px]">
+              Free
+            </span>
+            <span className="text-gray-600">•</span>
+            <span className="px-3 py-1 rounded bg-[#151822] border border-[#D4AF37]/20 text-[#F3E5AB] font-mono text-[11px]">
+              Short &amp; Scenario-Based
+            </span>
+            <span className="text-gray-600">•</span>
+            <span className="px-3 py-1 rounded bg-[#151822] border border-[#D4AF37]/20 text-[#F3E5AB] font-mono text-[11px] flex items-center gap-1">
+              <Shield className="w-3 h-3 text-[#D4AF37]" />
+              100% Confidential
+            </span>
+          </div>
         </div>
 
-        {/* Steps */}
-        {!completed ? (
-          <div>
-            {/* Progress Bar */}
-            <div className="w-full bg-[#FFFDF0] border border-[#D4AF37]/30 h-2 mb-6">
-              <div 
-                className="bg-[#D4AF37] h-full transition-all duration-500"
-                style={{ width: `${((currentStep + 1) / QUIZ_QUESTIONS.length) * 100}%` }}
-              />
+        {/* SECTION 2 — WHAT IT READS */}
+        <div className="mb-10 pt-8 border-t border-gray-800">
+          <h3 className="text-lg font-serif font-bold text-[#F3E5AB] uppercase tracking-wider mb-6 flex items-center gap-2">
+            <span className="w-1.5 h-4 bg-[#D4AF37] rounded-full"></span>
+            <span>What the scan looks at</span>
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Vector 1 */}
+            <div className="p-5 rounded-xl bg-[#12151E] border border-gray-800 hover:border-[#D4AF37]/50 transition-colors">
+              <h4 className="text-sm font-bold text-white mb-2">Your energy pattern</h4>
+              <p className="text-xs text-gray-400 leading-relaxed font-light">
+                Whether your drive is running on clean fuel or on emergency reserves — and what that&apos;s costing you by the end of the day.
+              </p>
             </div>
 
-            <div className="flex items-center justify-between text-xs font-inter uppercase tracking-[0.2em] text-[#6C6863] mb-4">
-              <span>QUESTION {currentStep + 1} OF {QUIZ_QUESTIONS.length}</span>
-              <span className="text-[#D4AF37] font-semibold">{Math.round(((currentStep + 1) / QUIZ_QUESTIONS.length) * 100)}% COMPLETE</span>
+            {/* Vector 2 */}
+            <div className="p-5 rounded-xl bg-[#12151E] border border-gray-800 hover:border-[#D4AF37]/50 transition-colors">
+              <h4 className="text-sm font-bold text-white mb-2">Your control pattern</h4>
+              <p className="text-xs text-gray-400 leading-relaxed font-light">
+                Where your system learned that holding on tight equals staying safe, and what it&apos;s costing you to keep carrying everything yourself.
+              </p>
             </div>
 
-            {/* Question Text */}
-            <h3 className="font-playfair font-normal text-xl sm:text-2xl text-[#1A1A1A] mb-8 leading-snug">
-              {currentQ.question}
-            </h3>
-
-            {/* Options */}
-            <div className="space-y-4">
-              {currentQ.options.map((opt, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleOptionSelect(opt.points)}
-                  className="w-full text-left p-5 bg-[#FFFDF7] hover:bg-[#FFFDF0] border border-[#1A1A1A]/20 hover:border-[#D4AF37] text-xs sm:text-sm text-[#1A1A1A] transition-all duration-300 cursor-pointer flex items-start gap-4 group"
-                >
-                  <span className="w-6 h-6 border border-[#1A1A1A] group-hover:border-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-white text-[#1A1A1A] font-bold flex items-center justify-center text-xs shrink-0 mt-0.5 transition-colors">
-                    {String.fromCharCode(65 + idx)}
-                  </span>
-                  <span className="leading-relaxed font-inter font-medium group-hover:text-[#1A1A1A]">
-                    {opt.label}
-                  </span>
-                </button>
-              ))}
+            {/* Vector 3 */}
+            <div className="p-5 rounded-xl bg-[#12151E] border border-gray-800 hover:border-[#D4AF37]/50 transition-colors">
+              <h4 className="text-sm font-bold text-white mb-2">Where you&apos;re operating from</h4>
+              <p className="text-xs text-gray-400 leading-relaxed font-light">
+                Whether your system is running in survival mode, moving through the transition, or operating from your integrated state — <strong className="text-[#F3E5AB]">The ONE</strong>.
+              </p>
             </div>
           </div>
-        ) : (
-          /* Diagnostic Results */
-          <div className="space-y-6 animate-fadeIn">
-            {(() => {
-              const diag = getDiagnosis();
-              return (
-                <div>
-                  <div className={`inline-block px-4 py-2 text-[11px] font-inter font-bold uppercase tracking-[0.2em] mb-4 ${diag.badgeColor}`}>
-                    Score: {totalScore} / 16 — {diag.title}
-                  </div>
+        </div>
 
-                  <h3 className="font-playfair font-bold text-2xl text-[#1A1A1A] mb-4">
-                    Diagnostic Analysis
-                  </h3>
+        {/* SECTION 3 — HOW IT WORKS */}
+        <div className="mb-10 pt-8 border-t border-gray-800">
+          <h3 className="text-lg font-serif font-bold text-[#F3E5AB] uppercase tracking-wider mb-6 flex items-center gap-2">
+            <span className="w-1.5 h-4 bg-[#D4AF37] rounded-full"></span>
+            <span>When it&apos;s ready</span>
+          </h3>
 
-                  <p className="font-inter text-sm text-[#1A1A1A] leading-relaxed bg-[#FFFDF0] p-6 border border-[#D4AF37]/40 mb-8">
-                    {diag.summary}
-                  </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-gray-300">
+            <li className="p-4 rounded-lg bg-[#12151E] border border-gray-800/80 flex items-start gap-3">
+              <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block mb-0.5 font-semibold">Short.</strong>
+                <span className="text-gray-400">A handful of scenario-based questions, not a personality inventory.</span>
+              </div>
+            </li>
+            <li className="p-4 rounded-lg bg-[#12151E] border border-gray-800/80 flex items-start gap-3">
+              <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block mb-0.5 font-semibold">Instinct-based.</strong>
+                <span className="text-gray-400">You&apos;ll answer with your first reaction under pressure, not your best intention.</span>
+              </div>
+            </li>
+            <li className="p-4 rounded-lg bg-[#12151E] border border-gray-800/80 flex items-start gap-3">
+              <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block mb-0.5 font-semibold">Private.</strong>
+                <span className="text-gray-400">Your answers are yours. We don&apos;t sell or share them.</span>
+              </div>
+            </li>
+            <li className="p-4 rounded-lg bg-[#12151E] border border-gray-800/80 flex items-start gap-3">
+              <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block mb-0.5 font-semibold">Immediate.</strong>
+                <span className="text-gray-400">You get your read the moment you finish, plus your first move — free.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-                  <h4 className="font-inter font-bold text-xs uppercase tracking-[0.2em] text-[#D4AF37] mb-4">
-                    Recommended Re-Engineering Steps:
-                  </h4>
+        {/* SECTION 4 — CLOSE */}
+        <div className="p-6 sm:p-8 rounded-xl bg-gradient-to-r from-[#171A24] to-[#10121A] border border-[#D4AF37]/30 text-left">
+          <h3 className="text-xl font-serif font-bold text-[#F3E5AB] mb-2">
+            Be first through the door.
+          </h3>
+          <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed mb-6">
+            The Mirror Quiz is the front door to everything REGENESIS does. It&apos;s free, and it&apos;s the fastest way to see what&apos;s actually running underneath your drive.
+          </p>
 
-                  <ul className="space-y-3 mb-8">
-                    {diag.recommendations.map((rec, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-xs text-[#1A1A1A] font-inter">
-                        <CheckCircle className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
-                        <span>{rec}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-col sm:flex-row items-center gap-4 pt-6 border-t border-[#1A1A1A]/15">
-                    <button
-                      onClick={() => { onClose(); onOpenContact(); }}
-                      className="btn-gold-slide h-12 px-8 text-xs uppercase tracking-[0.2em] font-inter font-medium w-full sm:flex-1 cursor-pointer"
-                    >
-                      <span>Book Executive Consult</span>
-                    </button>
-                    
-                    <button
-                      onClick={resetQuiz}
-                      className="btn-editorial-outline h-12 px-6 text-xs uppercase tracking-[0.2em] font-inter font-medium w-full sm:w-auto flex items-center justify-center gap-2 cursor-pointer"
-                    >
-                      <RefreshCw className="w-3.5 h-3.5" />
-                      <span>Retake Quiz</span>
-                    </button>
-                  </div>
-                </div>
-              );
-            })()}
-          </div>
-        )}
+          {!isSubmitted && (
+            <button
+              onClick={() => {
+                const el = document.querySelector('input[type="email"]');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-6 py-3 rounded-lg bg-[#D4AF37] hover:bg-[#F3E5AB] text-[#0B0C0E] font-bold text-xs uppercase tracking-widest transition-all cursor-pointer inline-flex items-center gap-2"
+            >
+              <span>REGISTER FOR EARLY ACCESS</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
+        </div>
 
       </div>
     </div>
